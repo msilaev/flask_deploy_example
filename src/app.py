@@ -1,7 +1,21 @@
 from flask import Flask, render_template
+import os
 from game_of_life import GameOfLife
 
 app=Flask(__name__)
+
+# Get the current directory (location of app.py)
+current_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(current_dir)
+
+
+# Define the relative path to the template folder
+template_folder = os.path.join(parent_dir, 'templates')
+
+# Set the template folder for the Flask application
+app.template_folder = template_folder
+app.static_folder = os.path.join(parent_dir, 'static')
+
 
 @app.route('/')
 def index():
@@ -27,4 +41,5 @@ def live_periodic():
 
 
 if __name__=="__main__":
+    print(app.static_folder)
     app.run(host= "0.0.0.0", port =5000)
