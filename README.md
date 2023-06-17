@@ -1,6 +1,6 @@
 # ProjectLife
 
-![Project Life preview](GoLscreenshot.jpg| width=50) 
+![Project Life preview](GoLscreenshot.jpg){width=50%} 
 
 
 ## Table of contents
