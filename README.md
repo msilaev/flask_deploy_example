@@ -1,6 +1,6 @@
 # ProjectLife
 
-![Project Life preview](.images/GoLscreenshot.jpg)
+![Project Life preview](GoLscreenshot.jpg)
 
 
 ## Table of contents
