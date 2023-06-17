@@ -1,8 +1,22 @@
 from flask import Flask, render_template
 import os
 from game_of_life import GameOfLife
+import os
 
-app=Flask(__name__)
+current_dir = os.path.abspath(os.path.dirname(__file__))
+parent_dir = os.path.dirname(current_dir)
+template_folder = os.path.join(parent_dir, 'templates')
+static_folder = os.path.join(parent_dir, 'static')
+
+print(template_folder )
+
+# Set the template folder for the Flask application
+
+app = Flask(__name__)
+
+app.template_folder = template_folder
+app.static_folder = static_folder
+
 
 # Get the current directory (location of app.py)
 current_dir = os.path.dirname(os.path.abspath(__file__))
