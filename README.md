@@ -10,7 +10,7 @@
 
 ## General info
 
-This is a training project in the Flask learning course. The project realizes the [Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) (GoF) in a brawser. Two versoins are realized: (i) life in a box and (ii) life on a thorus. They differ by the way how the number of cell's neighbours is calculated.  
+This is a training project in the Flask learning course. The project realizes the [Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) (GoF) in a browser. Two versoins are realized: (i) life in a box and (ii) life on a thorus. They differ by the way how the number of cell's neighbours is calculated.  
 
 ## Technologies
 Project is created with:
