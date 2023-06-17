@@ -1,6 +1,6 @@
 # ProjectLife
 
-![Project Life preview](https://drive.google.com/drive/folders/1hlMRF8giNpQPWOjEM1Net_aegJ_sOzwf)
+![Project Life preview](https://gitlab.com/flaskcourse/images/-/blob/main/GoLscreenshot.jpg)
 
 
 ## Table of contents
