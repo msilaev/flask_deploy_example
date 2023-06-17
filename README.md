@@ -21,7 +21,7 @@ It was tested in a browser
 * Microsoft Edge Version 114.0.1823.43 (Official build) (64-bit)
 
 ## Setup
-Clone this repo to your desktop
+Clone this repo to your desktop or download zip and unpack
 
 ## Usage
 After you clone this repo to your desktop,   run pip install -r requirements.txt
