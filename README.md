@@ -1,6 +1,6 @@
 # ProjectLife
 
-![Project Life preview](https://gitlab.com/flaskcourse/images/-/blob/main/GoLscreenshot.jpg)
+![Project Life preview](https://gitlab.com/flaskcourse/images/-/blob/19d9800cc23d13d263276bde87102df2bff7f5b3/GoLscreenshot.jpg)
 
 
 ## Table of contents
