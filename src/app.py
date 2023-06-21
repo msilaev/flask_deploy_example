@@ -1,6 +1,10 @@
-from flask import Flask, render_template
-import os
+from flask import Flask, render_template, request, url_for
 from game_of_life import GameOfLife
+from config import Config
+from werkzeug.utils import redirect
+
+from project.forms import MessageForm
+
 import os
 
 current_dir = os.path.abspath(os.path.dirname(__file__))
@@ -8,34 +12,38 @@ parent_dir = os.path.dirname(current_dir)
 template_folder = os.path.join(parent_dir, 'templates')
 static_folder = os.path.join(parent_dir, 'static')
 
-print(template_folder )
-
 # Set the template folder for the Flask application
 
 app = Flask(__name__)
+app.config.from_object(Config)
 
 app.template_folder = template_folder
 app.static_folder = static_folder
 
-
-# Get the current directory (location of app.py)
-current_dir = os.path.dirname(os.path.abspath(__file__))
-parent_dir = os.path.dirname(current_dir)
-
-
-# Define the relative path to the template folder
-template_folder = os.path.join(parent_dir, 'templates')
-
-# Set the template folder for the Flask application
-app.template_folder = template_folder
-app.static_folder = os.path.join(parent_dir, 'static')
-
-
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    GameOfLife(25, 25)
+    height = 25
+    width = 25
 
-    return render_template("index.html")
+    form = MessageForm()
+    print(form.validate_on_submit())
+    if form.validate_on_submit():
+        height = form.height.data
+        width = form.width.data
+        print('\n Data received. Redirection ..')
+
+        GameOfLife(height, width)
+        print(f"param {height}, {width}")
+
+        return redirect(url_for('creation'))
+
+    return render_template("index.html", form=form, width=width, heigth=height)
+
+@app.route('/creation', methods=['GET', 'POST'])
+def creation():
+    print("creation")
+
+    return render_template("creation.html")
 
 @app.route('/live_box')
 def live_box():
@@ -53,7 +61,5 @@ def live_periodic():
     game.counter = game.counter + 1
     return render_template("live_periodic.html", game=game)
 
-
 if __name__=="__main__":
-    print(app.static_folder)
     app.run(host= "0.0.0.0", port =5000)
