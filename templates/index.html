@@ -1,10 +1,25 @@
 {% extends 'base.html' %}
 
-  {% block app_content %}
 
-  <a class="btn btn-warning home" href="{{ url_for('live_box') }}">Create life in a box</a>
-  <a class="btn btn-info refresh" href="{{ url_for('live_periodic') }}">Create life on a torus</a>
+{% block app_content %}
+<div class="form_class">
 
-   {% endblock %}
+    <form action="" method="post">
+           {{ form.csrf_token() }}
+
+           {% for field in form if field.name != 'csrf_token' and field.name != 'submit' %}
+            <p> {{ field.label }} </p>
+            <p>
+                 {{ field }}
+                 {% for error in field.errors %}
+                     {{ error }}
+                 {% endfor %}
+            </p>
+        {% endfor %}
+        {{ form.submit }}
+    </form>
+</div>
+
+{% endblock %}
 
 
