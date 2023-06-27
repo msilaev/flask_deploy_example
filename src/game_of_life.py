@@ -12,7 +12,7 @@ class SingletonMeta(type):
             if cls not in cls._instances or args or kwargs:
                 instance = super().__call__(*args, **kwargs)
                 cls._instances[cls] = instance
-                print("privet")
+               # print("privet")
         return cls._instances[cls]
 
 
