@@ -18,6 +18,7 @@ def index():
         #print('\n Data received. Redirection ..')
 
         GameOfLife(height, width)
+
         #print(f"param {height}, {width}")
 
         return redirect(url_for('creation'))
