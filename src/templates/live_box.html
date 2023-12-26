@@ -4,11 +4,13 @@
 
 <div class="tables-container">
     <a class="btn btn-warning home" href="{{ url_for('index') }}">Home</a>
-    <a class="btn btn-info refresh" href="{{ url_for('live_box') }}">Refresh</a>
 
-    <div class="counter"> {{game.counter}}  </div>
+     <a class="btn btn-info refresh" href="javascript:void(0)" onclick="refreshContent()">Refresh</a>
 
-    <table class="word table1">
+    <div class="counter" id="counter"> {{game.counter}} </div>
+
+
+    <table class="word table1" id="life-box-table">
         <caption class="caption">Life in a box</caption>
 
         {% for i in range(game.height) %}
@@ -23,10 +25,29 @@
             {% endif %}
         {% endfor %}
         </tr>
-    {% endfor %}
+        {% endfor %}
 </table>
+</div>
 
-
- </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    function refreshContent() {
+        $.ajax({
+            type: 'GET',
+            url: '{{ url_for('live_box') }}',
+            success: function(response) {
+                // Update the content of the table without reloading the page
+                $('#life-box-table').html($(response).find('#life-box-table').html());
+                $('#life-box-table').html($(response).find('#life-box-table').html());
+                $('#counter').html($(response).find('#counter').html());
+            },
+            error: function(xhr, status, error) {
+                console.error('Error:', error);
+            }
+        });
+    }
+    setInterval(refreshContent, 1000);
+</script>
 {% endblock %}
+
 

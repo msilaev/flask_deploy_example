@@ -4,11 +4,14 @@
 
 <div class="tables-container">
     <a class="btn btn-warning home" href="{{ url_for('index') }}">Home</a>
-    <a class="btn btn-info refresh" href="{{ url_for('live_periodic') }}">Refresh</a>
-    <div class="counter"> {{game.counter}}  </div>
 
-    <table class="word table1">
-        <caption class="caption">Life on a torus</caption>
+     <a class="btn btn-info refresh" href="javascript:void(0)" onclick="refreshContent()">Refresh</a>
+
+    <div class="counter" id="counter"> {{game.counter}} </div>
+
+
+    <table class="word table1" id="life-periodic-table">
+        <caption class="caption">Life in a box</caption>
 
         {% for i in range(game.height) %}
         <tr>
@@ -22,10 +25,28 @@
             {% endif %}
         {% endfor %}
         </tr>
-    {% endfor %}
+        {% endfor %}
 </table>
+</div>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    function refreshContent() {
+        $.ajax({
+            type: 'GET',
+            url: '{{ url_for('live_periodic') }}',
+            success: function(response) {
+                // Update the content of the table without reloading the page
+                $('#life-periodic-table').html($(response).find('#life-periodic-table').html());
+                $('#life-periodic-table').html($(response).find('#life-periodic-table').html());
 
- </div>
+                $('#counter').html($(response).find('#counter').html());
+            },
+            error: function(xhr, status, error) {
+                console.error('Error:', error);
+            }
+        });
+    }
+    setInterval(refreshContent, 1000);
+</script>
 {% endblock %}
-

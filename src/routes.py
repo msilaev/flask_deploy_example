@@ -5,6 +5,16 @@ from werkzeug.utils import redirect
 
 from .project.forms import MessageForm
 
+#from flask import session
+
+from flask import g
+
+@app.before_request
+def before_request():
+    if not hasattr(g, 'game'):
+        g.game = GameOfLife()  # Initialize the instance if not present in 'g'
+
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
     height = 25
@@ -18,7 +28,6 @@ def index():
         #print('\n Data received. Redirection ..')
 
         GameOfLife(height, width)
-
         #print(f"param {height}, {width}")
 
         return redirect(url_for('creation'))
@@ -33,17 +42,18 @@ def creation():
 
 @app.route('/live_box')
 def live_box():
-    game = GameOfLife()
-    if game.counter > 0:
-        game.form_new_generation_box()
-    game.counter = game.counter + 1
-    return render_template("live_box.html", game=game)
+   #game = GameOfLife()
+   game = g.game
+   if game.counter > 0:
+      game.form_new_generation_box()
+   game.counter = game.counter + 1
+   return render_template("live_box.html", game=game)
 
 @app.route('/live_periodic')
 def live_periodic():
-    game = GameOfLife()
+    game = g.game
     if game.counter > 0:
-        game.form_new_generation_periodic()
+        game.form_new_generation_box()
     game.counter = game.counter + 1
     return render_template("live_periodic.html", game=game)
 
