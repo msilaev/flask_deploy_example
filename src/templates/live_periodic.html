@@ -11,7 +11,7 @@
 
 
     <table class="word table1" id="life-periodic-table">
-        <caption class="caption">Life in a box</caption>
+        <caption class="caption">Life on a torus</caption>
 
         {% for i in range(game.height) %}
         <tr>
@@ -46,6 +46,6 @@
             }
         });
     }
-    setInterval(refreshContent, 1000);
+    setInterval(refreshContent, 200);
 </script>
 {% endblock %}

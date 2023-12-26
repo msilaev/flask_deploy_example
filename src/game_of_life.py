@@ -10,6 +10,7 @@ class SingletonMeta(type):
     def __call__(cls, *args, **kwargs):
         with cls._lock:
             #if cls not in cls._instances or args or kwargs:
+
             if not cls._instances or args or kwargs:
                 instance = super().__call__(*args, **kwargs)
                 cls._instances[cls] = instance
@@ -30,17 +31,26 @@ class GameOfLife(metaclass=SingletonMeta):
     @property
     def width(self):
         return self.__width
+    @width.setter
+    def width(self, width):
+        self.__width = width
 
     @property
     def height(self):
         return self.__height
 
+    @height.setter
+    def height(self, height):
+        self.__height = height
+
 
     def form_new_generation_box(self):
-        # self.counter = self.counter+1
+        #self.counter = self.counter+1
         self.old_world = copy.deepcopy(self.world)
         universe = self.world
         new_world = [[0 for _ in range(self.__width)] for _ in range(self.__height)]
+
+        #print(self.__width, self.__height, len(universe), len(universe[0]))
 
         for i in range(len(universe)):
             for j in range(len(universe[0])):

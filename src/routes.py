@@ -23,15 +23,22 @@ def index():
     form = MessageForm()
     #print(form.validate_on_submit())
     if form.validate_on_submit():
+        g.game.counter =0
+
         height = form.height.data
         width = form.width.data
         #print('\n Data received. Redirection ..')
 
-        GameOfLife(height, width)
+        g.game.height = height
+        g.game.width =  width
+        #GameOfLife(height, width)
         #print(f"param {height}, {width}")
+
+        g.game.world = g.game.generate_universe()
 
         return redirect(url_for('creation'))
 
+    g.game.world = g.game.generate_universe()
     return render_template("index.html", form=form, width=width, heigth=height)
 
 @app.route('/creation', methods=['GET', 'POST'])
