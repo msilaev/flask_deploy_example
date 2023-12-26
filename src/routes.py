@@ -11,8 +11,10 @@ from flask import g
 
 @app.before_request
 def before_request():
-    if not hasattr(g, 'game'):
-        g.game = GameOfLife()  # Initialize the instance if not present in 'g'
+    if  hasattr(g, 'game'):
+        del g.game
+
+    g.game = GameOfLife()  # Initialize the instance if not present in 'g'
 
 
 @app.route('/', methods=['GET', 'POST'])
