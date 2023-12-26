@@ -38,7 +38,7 @@
             success: function(response) {
                 // Update the content of the table without reloading the page
                 $('#life-box-table').html($(response).find('#life-box-table').html());
-                $('#life-box-table').html($(response).find('#life-box-table').html());
+
                 $('#counter').html($(response).find('#counter').html());
             },
             error: function(xhr, status, error) {
