@@ -45,7 +45,27 @@
             }
         });
     }
-    setInterval(refreshContent, 200);
+
+    function startRefreshing() {
+        refreshInterval = setInterval(refreshContent, 200);
+    }
+
+    function stopRefreshing() {
+        clearInterval(refreshInterval);
+    }
+
+    // Start sending requests when the page is fully loaded
+    $(document).ready(function() {
+        startRefreshing();
+    });
+
+    // Stop sending requests when the page is about to unload or close
+    $(window).on('beforeunload', function() {
+        stopRefreshing();
+    });
+
+
+
 </script>
 {% endblock %}
 

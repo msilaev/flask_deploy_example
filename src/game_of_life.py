@@ -2,9 +2,9 @@ import random
 import copy
 from threading import Lock
 
-
 class SingletonMeta(type):
-    _instances = {}
+    #_instances = {}
+    _instances = None
     _lock: Lock = Lock()
 
     def __call__(cls, *args, **kwargs):
@@ -12,20 +12,34 @@ class SingletonMeta(type):
             #if cls not in cls._instances or args or kwargs:
 
             if not cls._instances or args or kwargs:
+                #print("new instance")
                 instance = super().__call__(*args, **kwargs)
-                cls._instances[cls] = instance
-               # print("privet")
-        return cls._instances[cls]
+               # cls._instances[cls] = instance
+                cls._instances = instance
 
+               # print("privet")
+        return cls._instances
 
 class GameOfLife(metaclass=SingletonMeta):
+
+    _instance = None
+    flag_first = True
+    def __new__(cls, *args, **kwargs):
+        if cls._instance is None :
+            cls._instance = super().__new__(cls)
+            cls.flag_first = False
+        else :
+            cls.flag_first = True
+        return cls._instance
+
     def __init__(self, width=20, height=20, counter=0, system_type="periodic"):
-        self.__width = width
-        self.__height = height
-        self.world = self.generate_universe()
-        self.old_world = copy.deepcopy(self.world)
-        self.counter = counter
-        self.system_type = system_type
+       # if not self.flag_first :
+            self.__width = width
+            self.__height = height
+            self.world = self.generate_universe()
+            self.old_world = copy.deepcopy(self.world)
+            self.counter = counter
+            self.system_type = system_type
 
 
     @property
