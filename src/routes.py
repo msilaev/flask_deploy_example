@@ -7,8 +7,8 @@ from .project.forms import MessageForm
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    height = 25
-    width = 25
+    height = 5
+    width = 5
 
     form = MessageForm()
     #print(form.validate_on_submit())
