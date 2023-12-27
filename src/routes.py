@@ -23,6 +23,7 @@ def index():
         return redirect(url_for('creation'))
 
     #g.game.world = g.game.generate_universe()
+    #return redirect(url_for('creation'))
     return render_template("index.html", form=form, width=width, heigth=height)
 
 @app.route('/creation', methods=['GET', 'POST'])
@@ -45,6 +46,6 @@ def live_box():
 def live_periodic():
     game = GameOfLife()
     if game.counter > 0:
-        game.form_new_generation_box()
+        game.form_new_generation_periodic()
     game.counter = game.counter + 1
     return render_template("live_periodic.html", game=game)
