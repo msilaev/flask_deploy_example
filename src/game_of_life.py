@@ -32,7 +32,7 @@ class GameOfLife(metaclass=SingletonMeta):
             cls.flag_first = True
         return cls._instance
 
-    def __init__(self, width=20, height=20, counter=0, system_type="periodic"):
+    def __init__(self, width=6, height=6, counter=0, system_type="periodic"):
        # if not self.flag_first :
             self.__width = width
             self.__height = height
