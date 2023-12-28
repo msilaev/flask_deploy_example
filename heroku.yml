@@ -3,4 +3,7 @@ build:
     web: Dockerfile
 
 run:
-  web: bundle exec puma -C config/puma.rb
+  web: gunicorn -b 0.0.0.0:$PORT app:app  # Replace 'app:app' with your Flask app entry point
+
+
+
