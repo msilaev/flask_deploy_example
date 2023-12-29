@@ -3,21 +3,15 @@ import copy
 from threading import Lock
 
 class SingletonMeta(type):
-    #_instances = {}
+
     _instances = None
     _lock: Lock = Lock()
 
     def __call__(cls, *args, **kwargs):
         with cls._lock:
-            #if cls not in cls._instances or args or kwargs:
-
             if not cls._instances or args or kwargs:
-                #print("new instance")
                 instance = super().__call__(*args, **kwargs)
-               # cls._instances[cls] = instance
                 cls._instances = instance
-
-               # print("privet")
         return cls._instances
 
 class GameOfLife(metaclass=SingletonMeta):
@@ -25,22 +19,21 @@ class GameOfLife(metaclass=SingletonMeta):
     _instance = None
     flag_first = True
     def __new__(cls, *args, **kwargs):
-        if cls._instance is None :
+        if cls._instance is None:
             cls._instance = super().__new__(cls)
             cls.flag_first = False
-        else :
+        else:
             cls.flag_first = True
         return cls._instance
 
     def __init__(self, width=6, height=6, counter=0, system_type="periodic"):
-       # if not self.flag_first :
+
             self.__width = width
             self.__height = height
             self.world = self.generate_universe()
             self.old_world = copy.deepcopy(self.world)
             self.counter = counter
             self.system_type = system_type
-
 
     @property
     def width(self):
@@ -57,14 +50,10 @@ class GameOfLife(metaclass=SingletonMeta):
     def height(self, height):
         self.__height = height
 
-
     def form_new_generation_box(self):
-        #self.counter = self.counter+1
         self.old_world = copy.deepcopy(self.world)
         universe = self.world
         new_world = [[0 for _ in range(self.__width)] for _ in range(self.__height)]
-
-        #print(self.__width, self.__height, len(universe), len(universe[0]))
 
         for i in range(len(universe)):
             for j in range(len(universe[0])):
@@ -83,7 +72,6 @@ class GameOfLife(metaclass=SingletonMeta):
         self.world = new_world
 
     def form_new_generation_periodic(self):
-        # self.counter = self.counter+1
         self.old_world = copy.deepcopy(self.world)
         universe = self.world
         new_world = [[0 for _ in range(self.__width)] for _ in range(self.__height)]

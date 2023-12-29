@@ -1,12 +1,28 @@
-{% block content %}
- <div class = "content">
-   {% block app_content%}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Game of Life</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Your custom CSS -->
+    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" type="text/css">
+</head>
 
-   {% endblock %}
- </div>
-{% endblock %}
+<body>
 
-{% block scripts %}
- <link href="{{ url_for("static", filename="style.css") }}" rel="stylesheet" type="text/css"/>
-{% endblock %}
 
+<div class="content">
+        {% block content %}
+            {% block app_content %}
+            {% endblock %}
+        {% endblock %}
+</div>
+    <!-- Bootstrap JavaScript and jQuery (if needed) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Your custom scripts -->
+    {% block scripts %}
+    {% endblock %}
+</body>
+</html>

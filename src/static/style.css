@@ -229,3 +229,14 @@ a, table {
     background-color: #f0ad4e;
     border-color: #eea236
 }
+
+.button-column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.button-column button,
+.button-column a {
+    margin-bottom: 8px; /* Adjust the spacing between buttons as needed */
+}

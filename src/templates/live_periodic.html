@@ -1,34 +1,55 @@
 {% extends 'base.html' %}
 
+<body>
 {% block app_content %}
 
-<div class="tables-container">
-    <a class="btn btn-warning home" href="{{ url_for('index') }}">Home</a>
-
-     <a class="btn btn-info refresh" href="javascript:void(0)" onclick="refreshContent()">Refresh</a>
-
-    <div class="counter" id="counter"> {{game.counter}} </div>
-
-
-    <table class="word table1" id="life-periodic-table">
-        <caption class="caption">Life on a torus</caption>
-
-        {% for i in range(game.height) %}
-        <tr>
-        {% for j in range(game.width) %}
-            {% if game.world[i][j] %}
-                <td class="cell living-cell"></td>
-            {% elif game.world[i][j]==0 and game.old_world[i][j] !=0%}
-                <td class="cell dead-cell"></td>
-            {% else %}
-                <td class="cell"></td>
-            {% endif %}
-        {% endfor %}
-        </tr>
-        {% endfor %}
-</table>
+<div class="container">
+    <div class="row mt-1">
+        <div class="col-md-12">
+            <form class="form-inline">
+                <button class="btn-lg btn-outline-success" type="button" id="startButton">Start</button>
+                <button class="btn-lg btn-outline-success" type="button" id="pauseButton">Pause</button>
+                <button class="btn-lg btn-outline-success" type="button" id="resumeButton">Resume</button>
+                <button class="btn-lg btn-outline-success" type="button" id="startoverButton">Start over</button>
+                <button class="btn-lg btn-outline-success" type="button" id="homeButton">Home</button>
+            </form>
+        </div>
+    </div>
+    <div class="row mt-1">
+        <div class="col-md-12">
+             <p id="counter" style="font-size: 24px;">
+                 Generations: {{ game.counter }}
+             </p>
+        </div>
+    </div>
 </div>
 
+<div>
+    <table class="word" id="life-periodic-table">
+        <!-- Caption for the table -->
+        <caption style="caption-side: top; text-align: center; font-size: 30px;">
+            Life on a torus
+        </caption>
+        <!-- Table content -->
+        {% for i in range(game.height) %}
+            <tr>
+                {% for j in range(game.width) %}
+                    {% if game.world[i][j] %}
+                        <td class="cell living-cell"></td>
+                    {% elif game.world[i][j]==0 and game.old_world[i][j] !=0%}
+                        <td class="cell dead-cell"></td>
+                    {% else %}
+                        <td class="cell"></td>
+                    {% endif %}
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}
+</body>
+
+{% block scripts %}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     function refreshContent() {
@@ -38,7 +59,6 @@
             success: function(response) {
                 // Update the content of the table without reloading the page
                 $('#life-periodic-table').html($(response).find('#life-periodic-table').html());
-
                 $('#counter').html($(response).find('#counter').html());
             },
             error: function(xhr, status, error) {
@@ -55,15 +75,29 @@
         clearInterval(refreshInterval);
     }
 
-    // Start sending requests when the page is fully loaded
-    $(document).ready(function() {
-        startRefreshing();
-    });
-
     // Stop sending requests when the page is about to unload or close
     $(window).on('beforeunload', function() {
         stopRefreshing();
     });
 
+    $('#startButton').on('click', function() {
+        startRefreshing(); // Start refreshing when the 'Start' button is clicked
+    });
+
+    $('#pauseButton').on('click', function() {
+        stopRefreshing(); // Stop refreshing when the 'Pause' button is clicked
+    });
+
+    $('#homeButton').on('click', function() {
+        window.location.href = "{{ url_for('index') }}"; // Redirect to home on button click
+    });
+
+    $('#startoverButton').on('click', function() {
+        window.location.href = "{{ url_for('start_over_periodic') }}"; // Redirect to start over on button click
+    });
+
+    $('#resumeButton').on('click', function() {
+        startRefreshing(); // Resume refreshing when the 'Resume' button is clicked
+    });
 </script>
 {% endblock %}

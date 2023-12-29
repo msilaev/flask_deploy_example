@@ -2,9 +2,38 @@
 
 {% block app_content %}
 
+<div class="container  d-flex justify-content-center">
+     <div class="row mt-1">
+        <div class="col-md-12">
+            <form class="form-inline">
+                <button class="btn-xl btn-outline-success" type="button"
+                        id="lifeboxButton">Create life in a box
+                </button>
+                <button class="btn-xl btn-outline-success" type="button"
+                        id="lifetorusButton">Create life on a torus
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+<!--
 <a class="btn btn-warning home" href="{{ url_for('live_box') }}">Create life in a box</a>
 <a class="btn btn-info refresh" href="{{ url_for('live_periodic') }}">Create life on a torus</a>
-
+-->
 {% endblock %}
 
+{% block scripts %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+
+    $('#lifeboxButton').on('click', function() {
+        window.location.href = "{{ url_for('live_box') }}"; // Redirect to home on button click
+    });
+
+    $('#lifetorusButton').on('click', function() {
+        window.location.href = "{{ url_for('live_periodic') }}"; // Redirect to home on button click
+    });
+
+</script>
+{% endblock %}
 
