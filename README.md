@@ -12,12 +12,15 @@
 
 ## General info
 
-This is a training project in the Flask learning course. The project realizes the [Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) (GoF) in a browser. Two versoins are realized: (i) life in a box and (ii) life on a thorus. They differ by the way how the number of cell's neighbours is calculated. 
+This is a training project in the Flask learning course. The project realizes the [Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) (GoF) in a browser.
+Two versions are realized: (i) life in a box and (ii) life on a torus. 
+They differ by the way how the number of cell's neighbors is calculated. 
 
 ## Deployment
 
-The app is deployed on the Heroku server using a Docker container. Please try at 
-https://flaskgamelife-e9965bc6d371.herokuapp.com/
+The app was deployed on the Heroku server using a Docker container but has now been deleted due to hosting costs. 
+It can be restored upon request. 
+<!-- Please try at https://flaskgamelife-e9965bc6d371.herokuapp.com/-->
 
 ## Technologies
 The project is created with:
@@ -26,7 +29,7 @@ The project is created with:
 * Jinja2==3.1.2
 * gunicorn==21.2.0
 It was tested in a browser 
-* Microsoft Edge Version 114.0.1823.43 (Official build) (64-bit)
+* Microsoft Edge Version 114.0.1823.43 (Official Build) (64-bit)
 
 ## Setup
 Clone this repo to your desktop or download zip and unpack
