@@ -18,8 +18,9 @@ They differ by the way how the number of cell's neighbors is calculated.
 
 ## Deployment
 
-The app was deployed on the Heroku server using a Docker container but has now been deleted due to hosting costs. 
-It can be restored upon request. 
+Published to Docker Hub and deployed using free tier on render.com 
+Please try at https://flask-app-uo2y.onrender.com/
+
 <!-- Please try at https://flaskgamelife-e9965bc6d371.herokuapp.com/-->
 
 ## Technologies
